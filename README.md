@@ -2,6 +2,20 @@
 
 A command-line tool that allows you to download all public repositories from a GitHub user with an interactive selection interface.
 
+## Prerequisites
+
+This tool requires the UV Python package manager. To install UV:
+
+```bash
+# On macOS/Linux
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# On Windows (PowerShell)
+powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+
+For more installation options, visit: https://github.com/astral-sh/uv#installation
+
 ## Installation
 
 1. Clone this repository
@@ -18,7 +32,7 @@ A command-line tool that allows you to download all public repositories from a G
 ## Usage
 
 ```bash
-python github_downloader.py <github_username>
+uv run github_downloader.py <github_username>
 ```
 
 This will:
