@@ -32,7 +32,17 @@ For more installation options, visit: https://github.com/astral-sh/uv#installati
 ## Usage
 
 ```bash
-uv run github_downloader.py <github_username>
+# Basic usage - saves repositories to ~/Downloads by default
+python github_downloader.py <github_username>
+
+# Update existing repositories
+python github_downloader.py <github_username> --update
+
+# Specify a custom save location
+python github_downloader.py <github_username> --saveto /path/to/directory
+
+# Combined options
+python github_downloader.py <github_username> --update --saveto /path/to/directory
 ```
 
 This will:
@@ -51,28 +61,35 @@ This will:
 - Interactive repository selection interface
 - Beautiful table display of available repositories
 - Option to download all repositories or select specific ones
+- Saves repositories to ~/Downloads by default (cross-platform compatible)
+- Custom save location with --saveto flag
 - Downloads repositories to an organized directory structure
 - Shows progress with rich terminal output
 - Handles rate limiting and errors gracefully
 - Skips already downloaded repositories
 - Shows repository descriptions and star counts
 - Automatically adds downloaded repositories to .gitignore
-- Keeps all downloaded repositories within the script's directory
+- Keep repositories updated with the --update flag
 
 ## Directory Structure
 
 When you run the script, it will:
-1. Create a directory named after the GitHub username in the same directory as the script
+1. By default, create a directory in ~/Downloads named after the GitHub username
 2. Download all selected repositories into that directory
-3. Automatically add the username directory to .gitignore to prevent git from tracking the downloaded repositories
+3. Automatically add the directory to .gitignore if the current directory is a git repository
 
 Example structure:
 ```
-github-multi-downloader/
-├── github_downloader.py
-├── requirements.txt
-├── README.md
-└── .gitignore
+~/Downloads/
+└── example_user/           # Created automatically
+    ├── repo1/
+    ├── repo2/
+    └── repo3/
+```
+
+Or with custom save location:
+```
+/path/to/directory/
 └── example_user/           # Created automatically
     ├── repo1/
     ├── repo2/
@@ -83,6 +100,8 @@ github-multi-downloader/
 
 ```bash
 $ python github_downloader.py example_user
+
+Repositories will be saved to: /Users/username/Downloads
 
 Available Repositories:
 ┌───────┬──────────────────┬──────────────────────────────┬───────┐
@@ -102,7 +121,6 @@ Selection: 1,3
 ## Future Updates
 
 The following features are planned for future updates:
-- `--update` flag to update all downloaded repositories using `git pull`
 - Support for private repositories (requires GitHub token)
 - Repository filtering by language, stars, or last updated date
 - Parallel downloads for faster repository cloning
